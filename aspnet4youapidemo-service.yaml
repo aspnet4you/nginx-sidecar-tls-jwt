@@ -1,0 +1,17 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: aspnet4you-apidemo-svc
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-internal: "true"
+spec:
+  type: LoadBalancer
+  ports:
+  - protocol: TCP
+    port: 443
+    name: https
+  - protocol: TCP
+    port: 80
+    name: http
+  selector:
+    app: aspnet4you-apidemo

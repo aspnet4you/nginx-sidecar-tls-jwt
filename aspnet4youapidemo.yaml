@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aspnet4you-apidemo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: aspnet4you-apidemo
+  template:
+    metadata:
+      labels:
+        app: aspnet4you-apidemo
+    spec:
+      containers:
+      - name: aspnet4you-apidemo
+        image: aspnet4you.azurecr.io/api.demo.dotnetcore:mb197
+        imagePullPolicy: Always
+      - name: nginxplus-sidecar
+        image: aspnet4you.azurecr.io/nginxplus-sidecar:v8.0
+        imagePullPolicy: Always
+      imagePullSecrets:
+      - name: aspnet4youapidemosecret
